@@ -48,42 +48,42 @@ function mousePressed()
 function keyPressed()
 {
     // You can optionaly handle the key press at global level...
-    switch(key)
-    {
-				case '0':
-            mgr.showScene( Block0 );
-            break;
-        case '1':
-            mgr.showScene( Block1 );
-            break;
-        case '2':
-            mgr.showScene( Block2 );
-            break;
-        case '3':
-            mgr.showScene( Block3 );
-            break;
-				case '4':
-            mgr.showScene( Block4 );
-            break;
-				case '5':
-            mgr.showScene( Block5 );
-            break;
-				case '6':
-            mgr.showScene( Block6_1 );
-            break;
-				case '7':
-            mgr.showScene( Block6_2 );
-            break;
-				case '8':
-            mgr.showScene( Block7_1 );
-            break;
-				case '9':
-            mgr.showScene( Block7_2 );
-            break;
-			case 'q':
-				mgr.showScene(Block8);
-				break;
-    }
+    // switch(key)
+    // {
+		// 		case '0':
+    //         mgr.showScene( Block0 );
+    //         break;
+    //     case '1':
+    //         mgr.showScene( Block1 );
+    //         break;
+    //     case '2':
+    //         mgr.showScene( Block2 );
+    //         break;
+    //     case '3':
+    //         mgr.showScene( Block3 );
+    //         break;
+		// 		case '4':
+    //         mgr.showScene( Block4 );
+    //         break;
+		// 		case '5':
+    //         mgr.showScene( Block5 );
+    //         break;
+		// 		case '6':
+    //         mgr.showScene( Block6_1 );
+    //         break;
+		// 		case '7':
+    //         mgr.showScene( Block6_2 );
+    //         break;
+		// 		case '8':
+    //         mgr.showScene( Block7_1 );
+    //         break;
+		// 		case '9':
+    //         mgr.showScene( Block7_2 );
+    //         break;
+		// 	case 'q':
+		// 		mgr.showScene(Block8);
+		// 		break;
+    // }
 
     // ... then dispatch via the SceneManager.
     mgr.handleEvent("keyPressed");
@@ -135,7 +135,7 @@ function Block0()
 			imageMode(CORNER);
 			button.hide();
 		}else if (counter ==0){
-      a.style("font-size",'100px')
+      a.style("font-size",'200px')
       a.position(window.innerWidth/2,window.innerHeight/2);
       counter++;
     }else if (counter ==1){
@@ -150,6 +150,7 @@ function Block0()
     cursor('pointer');
   }
 	this.setup=function(){
+		textFont('Times New Roman')
 		for (let i=1; i<10; i++){
 			ppts[i-1] = loadImage("src/part1-0"+i+".jpg");
 		}
@@ -181,7 +182,7 @@ function Block8()
 
   this.nextPPT = function(){
     if (counter ==2){
-      a.style("font-size",'100px')
+      a.style("font-size",'200px')
       a.position(window.innerWidth/2,window.innerHeight/2);
       button.hide();
     }
@@ -211,7 +212,8 @@ function Block8()
 // =============================================================
 function Block1()
 {
-		let faceUpCards = [];
+		let coin;
+		let played = false;
 		let faceDownCard = [];
 		let deck = [];
 		let cards = [];
@@ -231,6 +233,8 @@ function Block1()
 
     this.setup = function()
     {
+				coin = createAudio('src/coin.mp3');
+				coin.loop=false;
 				button = createButton('Gotcha');
 				button.hide();
 				for(let i = 0; i < faceUpCards.length; i++){
@@ -302,13 +306,18 @@ function Block1()
 			matches = matches && cards[i].isMatch
 		}
 		if(matches) {
-			//code
+			if (!played){
+				coin.play();
+				played = !played;
+			}
 			textSize(18);
 			fill(255, 0, 0)
 			text("You solved the puzzle!", 170, 190)
+			fill(0);
 			text("You are the first one to solve this problem. 50 bitcoins are given to you as reward.", 170,520);
 			text("You can pack all the transactions up and store it in the block.", 170,550);
 			text("Now move to the next block!", 170,580);
+			fill(255, 0, 0)
 			text("+50",60,400);
 			text("0",1230,70);
 			text("0",1230,170);
@@ -323,8 +332,9 @@ function Block1()
       button.show();
       button.position(1100*4, 570*4);
 		}	else{
+			textSize(18);
 			fill(255, 0, 0)
-			text("Nail the memory game as fast as possible to mine the block!",170,190);
+			text("Nail the memory game to mine the block!",170,190);
 		}
 		if (frameCount%60==0 && !matches){
 			timer++;
@@ -332,15 +342,15 @@ function Block1()
 		fill(255,0,0);
 		text(timer+" s",1125,190);
 	}
-	this.keyPressed = function(){
-		if (keyCode == ENTER){
-			// console.log("ENTER");
-			for(let i = 0; i < cards.length; i++)
-			{
-				cards[i].isMatch = true;
-			}
-		}
-	}
+	// this.keyPressed = function(){
+	// 	if (keyCode == ENTER){
+	// 		// console.log("ENTER");
+	// 		for(let i = 0; i < cards.length; i++)
+	// 		{
+	// 			cards[i].isMatch = true;
+	// 		}
+	// 	}
+	// }
 	this.mousePressed = function(){
 			if(mouseX/4 >= 1100 && mouseX/4 < 1100 + 115 && mouseY/4 >= 550  && mouseY/4 < 550 + 50 && matches){
 				button.hide();
@@ -374,7 +384,9 @@ function Block1()
 // =============================================================
 function Block2()
 {
-		let faceUpCards = [];
+		let coin;
+let played = false;
+let faceUpCards = [];
 		let faceDownCard = [];
 		let deck = [];
 		let cards = [];
@@ -395,7 +407,9 @@ function Block2()
    this.setup = function()
     {
 
-				button = createButton('Gotcha');
+				coin = createAudio('src/coin.mp3');
+coin.loop=false;
+button = createButton('Gotcha');
 				button.hide();
 				for(let i = 0; i < faceUpCards.length; i++){
 					deck.push(faceUpCards[i]);
@@ -482,13 +496,19 @@ function Block2()
 			matches = matches && cards[i].isMatch
 		}
 		if(matches) {
+  if (!played){
+    coin.play();
+    played = !played;
+  }
 			//code
 			textSize(18);
 			fill(255, 0, 0)
 			text("You solved the puzzle!", 170, 190)
+			fill(0)
 			text("Unfortunately, NPC 2 is faster than you. He got 25 bitcoins.", 170,520);
 			text("The memory game you are playing now simulates the hash function of the blocks: Each block is encrypted based on the previous block.", 170,550);
 			text("Now move to the next block!", 170,580);
+			fill(255, 0, 0)
 			text("50",60,400);
 			text("0",1230,70);
 			text("+25",1220,195);
@@ -504,7 +524,7 @@ button.style('font-size','60px');;
 button.position(1100*4, 570*4);
 		}	else{
 			fill(255, 0, 0)
-			text("Nail the memory game as fast as possible to mine the block!",170,190);
+			text("Nail the memory game to mine the block!",170,190);
 		}
 		if (frameCount%60==0 && !matches){
 			timer++;
@@ -512,15 +532,15 @@ button.position(1100*4, 570*4);
 		fill(255,0,0);
 		text(timer+" s",1125,190);
 	}
-	this.keyPressed = function(){
-		if (keyCode == ENTER){
-			// console.log("ENTER");
-			for(let i = 0; i < cards.length; i++)
-			{
-				cards[i].isMatch = true;
-			}
-		}
-	}
+	// this.keyPressed = function(){
+	// 	if (keyCode == ENTER){
+	// 		// console.log("ENTER");
+	// 		for(let i = 0; i < cards.length; i++)
+	// 		{
+	// 			cards[i].isMatch = true;
+	// 		}
+	// 	}
+	// }
 	this.mousePressed = function(){
 			if(mouseX/4 >= 1100 && mouseX/4 < 1100 + 115 && mouseY/4 >= 550  && mouseY/4 < 550 + 50 && matches){
 				button.hide();
@@ -552,7 +572,9 @@ button.position(1100*4, 570*4);
 
 function Block3( )
 {
-		let faceUpCards = [];
+		let coin;
+let played = false;
+let faceUpCards = [];
 		let faceDownCard = [];
 		let deck = [];
 		let cards = [];
@@ -573,7 +595,9 @@ function Block3( )
 
    this.setup = function()
     {
-				button = createButton('Gotcha');
+				coin = createAudio('src/coin.mp3');
+coin.loop=false;
+button = createButton('Gotcha');
 				button.hide();
 				for(let i = 0; i < faceUpCards.length; i++){
 					deck.push(faceUpCards[i]);
@@ -665,13 +689,18 @@ function Block3( )
 			matches = matches && cards[i].isMatch
 		}
 		if(matches) {
+  if (!played){
+    coin.play();
+    played = !played;
+  }
 			//code
 			textSize(18);
-			fill(255, 0, 0)
-			text("You solved the puzzle!", 170, 190)
+			fill(0)
 			text("Unfortunately, NPC 3 is faster than you. He got 25 bitcoins.", 170,520);
 			text("Have you noticed that the bitcoin reward has decreased? It is true: The reward drops when more blocks are mined in the chain.", 170,550);
 			text("Now move to the next block!", 170,580);
+			fill(255, 0, 0)
+			text("You solved the puzzle!", 170, 190)
 			text("50",60,400);
 			text("0",1230,70);
 			text("25",1230,170);
@@ -688,7 +717,7 @@ button.style('font-size','60px');;
 button.position(1100*4, 570*4);
 		}	else{
 			fill(255, 0, 0)
-			text("Nail the memory game as fast as possible to mine the block!",170,190);
+			text("Nail the memory game to mine the block!",170,190);
 		}
 		if (frameCount%60==0 && !matches){
 			timer++;
@@ -696,15 +725,15 @@ button.position(1100*4, 570*4);
 		fill(255,0,0);
 		text(timer+" s",1125,190);
 	}
-	this.keyPressed = function(){
-		if (keyCode == ENTER){
-			// console.log("ENTER");
-			for(let i = 0; i < cards.length; i++)
-			{
-				cards[i].isMatch = true;
-			}
-		}
-	}
+	// this.keyPressed = function(){
+	// 	if (keyCode == ENTER){
+	// 		// console.log("ENTER");
+	// 		for(let i = 0; i < cards.length; i++)
+	// 		{
+	// 			cards[i].isMatch = true;
+	// 		}
+	// 	}
+	// }
 	this.mousePressed = function(){
 			if(mouseX/4 >= 1100 && mouseX/4 < 1100 + 115 && mouseY/4 >= 550  && mouseY/4 < 550 + 50 && matches){
 				button.hide();
@@ -735,7 +764,9 @@ button.position(1100*4, 570*4);
 
 function Block4( )
 {
-	let faceUpCards = [];
+	let coin;
+let played = false;
+let faceUpCards = [];
 		let faceDownCard = [];
 		let deck = [];
 		let cards = [];
@@ -757,7 +788,9 @@ function Block4( )
 
    this.setup = function()
     {
-				button = createButton('Gotcha');
+				coin = createAudio('src/coin.mp3');
+coin.loop=false;
+button = createButton('Gotcha');
 				button.hide();
 				for(let i = 0; i < faceUpCards.length; i++){
 					deck.push(faceUpCards[i]);
@@ -853,15 +886,20 @@ function Block4( )
 			matches = matches && cards[i].isMatch
 		}
 		if(matches) {
+  if (!played){
+    coin.play();
+    played = !played;
+  }
 			//code
 			textSize(18);
-			fill(255, 0, 0)
-			text("You solved the puzzle!", 170, 190)
+			fill(0)
 			text("You are the first one to solve this problem. 25 bitcoins are given to you as reward.", 170,520);
 			text("A little tired of the memory game? The actual hash functions are mathematical problems. It would take much longer to solve! ", 170,550);
 			text("The only approach to solve the problem is to guess with brute force. ", 170,580);
       text("If you have large computational power, then you’ll be able to guess quicker and thus mine quicker.", 170,610)
-      text("50",60,400);
+			fill(255, 0, 0)
+			text("You solved the puzzle!", 170, 190)
+			text("50",60,400);
 			text("+25",60,425);
 			text("0",1230,70);
 			text("25",1230,170);
@@ -877,7 +915,7 @@ button.style('font-size','60px');;
 button.position(1100*4, 570*4);
 		}	else{
 			fill(255, 0, 0)
-			text("Nail the memory game as fast as possible to mine the block!",170,190);
+			text("Nail the memory game to mine the block!",170,190);
 		}
 		if (frameCount%60==0 && !matches){
 			timer++;
@@ -885,15 +923,15 @@ button.position(1100*4, 570*4);
 		fill(255,0,0);
 		text(timer+" s",1125,190);
 	}
-	this.keyPressed = function(){
-		if (keyCode == ENTER){
-			// console.log("ENTER");
-			for(let i = 0; i < cards.length; i++)
-			{
-				cards[i].isMatch = true;
-			}
-		}
-	}
+	// this.keyPressed = function(){
+	// 	if (keyCode == ENTER){
+	// 		// console.log("ENTER");
+	// 		for(let i = 0; i < cards.length; i++)
+	// 		{
+	// 			cards[i].isMatch = true;
+	// 		}
+	// 	}
+	// }
 	this.mousePressed = function(){
 			if(mouseX/4 >= 1100 && mouseX/4 < 1100 + 115 && mouseY/4 >= 550  && mouseY/4 < 550 + 50 && matches){
 				button.hide();
@@ -924,7 +962,9 @@ button.position(1100*4, 570*4);
 
 function Block5( )
 {
-		let faceUpCards = [];
+		let coin;
+let played = false;
+let faceUpCards = [];
 		let faceDownCard = [];
 		let deck = [];
 		let cards = [];
@@ -947,6 +987,7 @@ function Block5( )
 
    this.setup = function()
     {
+
 				NPC1 = createButton('NPC 1');
 		 		NPC3 = createButton('NPC 3');
 
@@ -1049,6 +1090,7 @@ function Block5( )
 			matches = matches && cards[i].isMatch
 		}
 		if(matches) {
+
 			//code
 			textSize(18);
 			strokeWeight(3);
@@ -1061,13 +1103,13 @@ function Block5( )
 			text("5.1",585,60);
 			text("5.2",585,140);
 
-			fill(255, 0, 0)
-			text("X",540,90);
-			text("You solve the puzzle!", 170, 190)
 			text("Oops! NPC 1 and NPC 3 are ahead of you, and they solved this problem at almost the same time!", 170, 520)
 			text("Two blocks are published. There is a fork now!", 170,550);
 			text("Make a choice of which chain you want to attach your future block to.", 170,580);
-			// text("BTW, you are not going to get any reward until the fork is settled (when there is a winner chain).", 170,610);
+
+			fill(255, 0, 0)
+			text("X",540,90);
+			text("You solved the puzzle!", 170, 190)
 			text("75",60,400);
 			text("0",1230,70);
 			text("25",1230,170);
@@ -1087,7 +1129,7 @@ function Block5( )
 
 		}	else{
 			fill(255, 0, 0)
-			text("Nail the memory game as fast as possible to mine the block!",170,190);
+			text("Nail the memory game to mine the block!",170,190);
 		}
 		if (frameCount%60==0 && !matches){
 			timer++;
@@ -1095,15 +1137,15 @@ function Block5( )
 		fill(255,0,0);
 		text(timer+" s",1125,190);
 	}
-	this.keyPressed = function(){
-		if (keyCode == ENTER){
-			// console.log("ENTER");
-			for(let i = 0; i < cards.length; i++)
-			{
-				cards[i].isMatch = true;
-			}
-		}
-	}
+	// this.keyPressed = function(){
+	// 	if (keyCode == ENTER){
+	// 		// console.log("ENTER");
+	// 		for(let i = 0; i < cards.length; i++)
+	// 		{
+	// 			cards[i].isMatch = true;
+	// 		}
+	// 	}
+	// }
 	this.mousePressed = function(){
 			if(mouseX/4 >= 650 && mouseX/4 < 650 + 115 && mouseY/4 >= 40  && mouseY/4 < 40 + 50 && matches){
 				NPC1.hide();
@@ -1140,7 +1182,9 @@ function Block5( )
 
 function Block6_1( )
 {
-		let faceUpCards = [];
+		let coin;
+let played = false;
+let faceUpCards = [];
 		let faceDownCard = [];
 		let deck = [];
 		let cards = [];
@@ -1164,7 +1208,8 @@ function Block6_1( )
 
    this.setup = function()
     {
-				button = createButton('Gotcha');
+
+			button = createButton('Gotcha');
 
 				for(let i = 0; i < faceUpCards.length; i++){
 					deck.push(faceUpCards[i]);
@@ -1245,10 +1290,11 @@ function Block6_1( )
 		image(user,1250,130,50,60);
 		text("NPC 3",1300,250);
 		image(user,1250,230,50,60);
-		fill(255,0,0);
 		textSize(18);
+		fill("#f6b235");
 		text("75",60,400);
 		text("0",1230,70);
+		fill(255,0,0);
 		text("25",1230,170);
 		text("25",1230,270);
 
@@ -1288,14 +1334,12 @@ function Block6_1( )
 			text("6.2",785,140);
 
 			textSize(18);
-			fill(255, 0, 0)
-			text("You solve the puzzle!", 170, 190)
 			text("Oops! You and NPC 2 solved this problem at almost the same time!", 170, 520)
 			text("The two sub-chains are still of the same length.", 170,550);
 			text("Try mining one more block!", 170,580);
 			text("BTW, nobody is going to get any reward until the fork is settled (when there is a winner chain).", 170,610);
-			text("75",60,400);
-			text("0",1230,70);
+			fill(255, 0, 0)
+			text("You solved the puzzle!", 170, 190)
 			text("25",1230,170);
 			text("25",1230,270);
 
@@ -1309,7 +1353,7 @@ button.style('font-size','60px');;
 			button.position(1100*4, 570*4);
 		}	else{
 			fill(255, 0, 0)
-			text("Nail the memory game as fast as possible to mine the block!",170,190);
+			text("Nail the memory game to mine the block!",170,190);
 		}
 		if (frameCount%60==0 && !matches){
 			timer++;
@@ -1317,15 +1361,15 @@ button.style('font-size','60px');;
 		fill(255,0,0);
 		text(timer+" s",1125,190);
 	}
-	this.keyPressed = function(){
-		if (keyCode == ENTER){
-			// console.log("ENTER");
-			for(let i = 0; i < cards.length; i++)
-			{
-				cards[i].isMatch = true;
-			}
-		}
-	}
+	// this.keyPressed = function(){
+	// 	if (keyCode == ENTER){
+	// 		// console.log("ENTER");
+	// 		for(let i = 0; i < cards.length; i++)
+	// 		{
+	// 			cards[i].isMatch = true;
+	// 		}
+	// 	}
+	// }
 	this.mousePressed = function(){
 			if(mouseX/4 >= 1100 && mouseX/4 < 1100 + 115 && mouseY/4 >= 550  && mouseY/4 < 550 + 50 && matches){
 				button.hide();
@@ -1356,7 +1400,9 @@ button.style('font-size','60px');;
 
 function Block6_2( )
 {
-			let faceUpCards = [];
+			let coin;
+let played = false;
+let faceUpCards = [];
 		let faceDownCard = [];
 		let deck = [];
 		let cards = [];
@@ -1380,7 +1426,8 @@ function Block6_2( )
 
    this.setup = function()
     {
-				button = createButton('Gotcha');
+
+			button = createButton('Gotcha');
 
 				for(let i = 0; i < faceUpCards.length; i++){
 					deck.push(faceUpCards[i]);
@@ -1460,11 +1507,12 @@ function Block6_2( )
 		image(user,30,270,90,100);
 		text("NPC 3",1300,250);
 		image(user,1250,230,50,60);
-		fill(255,0,0);
 		textSize(18);
-		text("75",60,400);
+		fill("#f6b235");
 		text("0",1230,70);
 		text("25",1230,170);
+		fill(255,0,0);
+		text("75",60,400);
 		text("25",1230,270);
 
 		noFill();
@@ -1503,15 +1551,13 @@ function Block6_2( )
 			text("6.2",785,140);
 
 			textSize(18);
-			fill(255, 0, 0)
-			text("You solve the puzzle!", 170, 190)
 			text("Oops! You and NPC 2 solved this problem at almost the same time!", 170, 520)
 			text("The two sub-chains are still of the same length.", 170,550);
 			text("Try mining one more block!", 170,580);
 			text("BTW, nobody is going to get any reward until the fork is settled (when there is a winner chain).", 170,610);
+			fill(255, 0, 0)
 			text("75",60,400);
-			text("0",1230,70);
-			text("25",1230,170);
+			text("You solved the puzzle!", 170, 190)
 			text("25",1230,270);
 
 			fill(0);
@@ -1523,7 +1569,7 @@ button.style('padding','60px 100px');
 button.style('font-size','60px');button.position(1100*4, 570*4);
 		}	else{
 			fill(255, 0, 0)
-			text("Nail the memory game as fast as possible to mine the block!",170,190);
+			text("Nail the memory game to mine the block!",170,190);
 		}
 		if (frameCount%60==0 && !matches){
 			timer++;
@@ -1531,15 +1577,15 @@ button.style('font-size','60px');button.position(1100*4, 570*4);
 		fill(255,0,0);
 		text(timer+" s",1125,190);
 	}
-	this.keyPressed = function(){
-		if (keyCode == ENTER){
-			// console.log("ENTER");
-			for(let i = 0; i < cards.length; i++)
-			{
-				cards[i].isMatch = true;
-			}
-		}
-	}
+	// this.keyPressed = function(){
+	// 	if (keyCode == ENTER){
+	// 		// console.log("ENTER");
+	// 		for(let i = 0; i < cards.length; i++)
+	// 		{
+	// 			cards[i].isMatch = true;
+	// 		}
+	// 	}
+	// }
 	this.mousePressed = function(){
 			if(mouseX/4 >= 1100 && mouseX/4 < 1100 + 115 && mouseY/4 >= 550  && mouseY/4 < 550 + 50 && matches){
 				button.hide();
@@ -1570,7 +1616,9 @@ button.style('font-size','60px');button.position(1100*4, 570*4);
 }
 function Block7_1( )
 {
-			let faceUpCards = [];
+			let coin;
+let played = false;
+let faceUpCards = [];
 		let faceDownCard = [];
 		let deck = [];
 		let cards = [];
@@ -1596,6 +1644,8 @@ function Block7_1( )
 
    this.setup = function()
     {
+			coin = createAudio('src/coin.mp3');
+			coin.loop=false;
 		 button = createButton("Gotcha");
 				for(let i = 0; i < faceUpCards.length; i++){
 					deck.push(faceUpCards[i]);
@@ -1682,10 +1732,11 @@ function Block7_1( )
 		image(user,1250,130,50,60);
 		text("NPC 3",1300,250);
 		image(user,1250,230,50,60);
-		fill(255,0,0);
 		textSize(18);
+		fill("#f6b235");
 		text("75",60,400);
 		text("0",1230,70);
+		fill(255,0,0);
 		text("25",1230,170);
 		text("25",1230,270);
 
@@ -1714,16 +1765,23 @@ function Block7_1( )
 			matches = matches && cards[i].isMatch
 		}
 		if(matches) {
+  if (!played){
+    coin.play();
+    played = !played;
+  }
 			textSize(18);
-			fill(255, 0, 0)
-			text("You solve the puzzle!", 170, 190)
-			text("Yes!! You are the first to solve this problem! Also, someone else has attached their block to this chain. So, we have a winner now!", 170, 520)
-			text("The shorter sub-chain (the red chain) will be abandoned-- You can still mine on it, but there is no point in doing so: You won't be awarded.", 170,550);
-			text("You are awarded 25 bitcoins for the two blocks you mined.", 170,580);
+			fill("#f6b235");
 			text("75",60,400);
 			text("+25",60,425);
 			text("0",1230,70);
 			text("+12.5",1220,95);
+
+			fill(0)
+			text("Yes!! You are the first to solve this problem! Also, someone else has attached their block to this chain. So, we have a winner now!", 170, 520)
+			text("The shorter sub-chain (the red chain) will be abandoned-- You can still mine on it, but there is no point in doing so: You won't be awarded.", 170,550);
+			text("You are awarded 25 bitcoins for the two blocks you mined.", 170,580);
+			fill(255, 0, 0)
+			text("You solved the puzzle!", 170, 190)
 			text("25",1230,170);
 			text("25",1230,270);
 			text("X",540,120);
@@ -1744,7 +1802,7 @@ button.style('font-size','60px');
 button.position(1100*4, 570*4);
 		}	else{
 			fill(255, 0, 0)
-			text("Nail the memory game as fast as possible to mine the block!",170,190);
+			text("Nail the memory game to mine the block!",170,190);
 		}
 		if (frameCount%60==0 && !matches){
 			timer++;
@@ -1752,15 +1810,15 @@ button.position(1100*4, 570*4);
 		fill(255,0,0);
 		text(timer+" s",1125,190);
 	}
-	this.keyPressed = function(){
-		if (keyCode == ENTER){
-			// console.log("ENTER");
-			for(let i = 0; i < cards.length; i++)
-			{
-				cards[i].isMatch = true;
-			}
-		}
-	}
+	// this.keyPressed = function(){
+	// 	if (keyCode == ENTER){
+	// 		// console.log("ENTER");
+	// 		for(let i = 0; i < cards.length; i++)
+	// 		{
+	// 			cards[i].isMatch = true;
+	// 		}
+	// 	}
+	// }
 	this.mousePressed = function(){
 			if(mouseX/4 >= 1100 && mouseX/4 < 1100 + 115 && mouseY/4 >= 550  && mouseY/4 < 550 + 50 && matches){
 				button.hide();
@@ -1790,7 +1848,9 @@ button.position(1100*4, 570*4);
 }
 function Block7_2( )
 {
-			let faceUpCards = [];
+			let coin;
+let played = false;
+let faceUpCards = [];
 		let faceDownCard = [];
 		let deck = [];
 		let cards = [];
@@ -1816,7 +1876,9 @@ function Block7_2( )
 
    this.setup = function()
     {
-		 				button = createButton('Gotcha');
+		 				coin = createAudio('src/coin.mp3');
+coin.loop=false;
+button = createButton('Gotcha');
 				for(let i = 0; i < faceUpCards.length; i++){
 					deck.push(faceUpCards[i]);
 					deck.push(faceUpCards[i]); //We want 2 cards.. so we duplicate
@@ -1902,11 +1964,12 @@ function Block7_2( )
 		image(user,30,270,90,100);
 		text("NPC 3",1300,250);
 		image(user,1250,230,50,60);
-		fill(255,0,0);
 		textSize(18);
-		text("75",60,400);
+		fill("#f6b235");
 		text("0",1230,70);
 		text("25",1230,170);
+		fill(255,0,0);
+		text("75",60,400);
 		text("25",1230,270);
 
 		noFill();
@@ -1934,17 +1997,21 @@ function Block7_2( )
 			matches = matches && cards[i].isMatch
 		}
 		if(matches) {
+  if (!played){
+    coin.play();
+    played = !played;
+  }
 			textSize(18);
-			fill(255, 0, 0)
-			text("You solve the puzzle!", 170, 190)
+			fill("#f6b235");
+			text("+12.5",1220,95);
+			fill(0)
 			text("Yes!! You are the first to solve this problem! Also, someone else has attached their block to this chain. So, we have a winner now!", 170, 520)
 			text("The shorter sub-chain (the yellow chain) will be abandoned-- You can still mine on it, but there is no point in doing so: You won't be awarded.", 170,550);
 			text("You are awarded 25 bitcoins for the two blocks you mined.", 170,580);
+			fill(255, 0, 0)
+			text("You solved the puzzle!", 170, 190)
 			text("75",60,400);
 			text("+25",60,425);
-			text("0",1230,70);
-			text("+12.5",1220,95);
-			text("25",1230,170);
 			text("25",1230,270);
 			text("X",540,60);
 			text("X",735,50);
@@ -1963,7 +2030,7 @@ button.style('font-size','60px');
 button.position(1100*4, 570*4);
 		}	else{
 			fill(255, 0, 0)
-			text("Nail the memory game as fast as possible to mine the block!",170,190);
+			text("Nail the memory game to mine the block!",170,190);
 		}
 		if (frameCount%60==0 && !matches){
 			timer++;
@@ -1971,15 +2038,15 @@ button.position(1100*4, 570*4);
 		fill(255,0,0);
 		text(timer+" s",1125,190);
 	}
-	this.keyPressed = function(){
-		if (keyCode == ENTER){
-			// console.log("ENTER");
-			for(let i = 0; i < cards.length; i++)
-			{
-				cards[i].isMatch = true;
-			}
-		}
-	}
+	// this.keyPressed = function(){
+	// 	if (keyCode == ENTER){
+	// 		// console.log("ENTER");
+	// 		for(let i = 0; i < cards.length; i++)
+	// 		{
+	// 			cards[i].isMatch = true;
+	// 		}
+	// 	}
+	// }
 	this.mousePressed = function(){
 			if(mouseX/4 >= 1100 && mouseX/4 < 1100 + 115 && mouseY/4 >= 550  && mouseY/4 < 550 + 50 && matches){
 				button.hide();
