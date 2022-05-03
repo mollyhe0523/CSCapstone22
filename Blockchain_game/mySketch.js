@@ -128,6 +128,7 @@ function Block0()
 	let counter = 0;
 	let	button = createButton('NEXT >>');
   let a = createA('https://docs.google.com/forms/d/1gLLPqJnCHwlx38z6u1mmiZ1DWN3IVaOPc7XH6EaCCmI','link','_blank');
+	a.hide();
 
 	this.nextPPT = function(){
 		if (counter==19){
@@ -135,7 +136,8 @@ function Block0()
 			imageMode(CORNER);
 			button.hide();
 		}else if (counter ==0){
-      a.style("font-size",'200px')
+			a.show();
+      a.style("font-size",'50px')
       a.position(window.innerWidth/2,window.innerHeight/2);
       counter++;
     }else if (counter ==1){
@@ -160,8 +162,8 @@ function Block0()
 		imageMode(CENTER);
     button.style('background-color',"#04AA6D");
     button.style('color',"white");
-    button.style('padding','60px 100px');
-    button.style('font-size','60px');
+    button.style('padding','15px 30px');
+    button.style('font-size','20px');
 		button.position(window.innerWidth*8/9, window.innerHeight*8/9);
     // button.mouseOver(this.cursor);
     button.mousePressed(this.nextPPT);
@@ -178,25 +180,29 @@ function Block8()
 	let ppts = [];
   let counter = 0;
   let	button = createButton('NEXT >>');
+	button.hide();
   let a = createA('https://docs.google.com/forms/d/1qt_hIo0TmFL2ECr4_W41jHOBq3B9LbNpnoRPUi1mtrs','link','_blank');
+	a.hide()
 
   this.nextPPT = function(){
     if (counter ==2){
-      a.style("font-size",'200px')
+			a.show();
+      a.style("font-size",'50px')
       a.position(window.innerWidth/2,window.innerHeight/2);
       button.hide();
     }
     counter++;
   }
 	this.setup=function(){
+		button.show();
 		imageMode(CENTER);
     for (let i=1; i<5; i++){
       ppts[i-1] = loadImage("src/part3-0"+i+".jpg");
     }
     button.style('background-color',"#04AA6D");
     button.style('color',"white");
-    button.style('padding','60px 100px');
-    button.style('font-size','60px');
+    button.style('padding','15px 30px');
+    button.style('font-size','20px');
 		button.position(window.innerWidth*8/9, window.innerHeight*8/9);
     button.mousePressed(this.nextPPT);
   }
@@ -264,7 +270,7 @@ function Block1()
 	this.draw = function(){
   // console.log(frameRate())
 	imageMode(CORNER);
-  scale(4);
+
 	background("#fbe39e");
 		textSize(22);
 		image(blueBlock, 80,50,70,70);
@@ -327,10 +333,10 @@ function Block1()
 			text("User",95,135);
 			button.style('background-color',"#04AA6D");
       button.style('color',"white");
-      button.style('padding','60px 100px');
-      button.style('font-size','60px');
+      button.style('padding','15px 30px');
+      button.style('font-size','20px');
       button.show();
-      button.position(1100*4, 570*4);
+      button.position(1100 , 570 );
 		}	else{
 			textSize(18);
 			fill(255, 0, 0)
@@ -352,12 +358,12 @@ function Block1()
 	// 	}
 	// }
 	this.mousePressed = function(){
-			if(mouseX/4 >= 1100 && mouseX/4 < 1100 + 115 && mouseY/4 >= 550  && mouseY/4 < 550 + 50 && matches){
+			if(mouseX  >= 1100 && mouseX  < 1100 + 115 && mouseY  >= 550  && mouseY  < 550 + 50 && matches){
 				button.hide();
 				this.sceneManager.showNextScene();
 			}
   for(let i=0; i < cards.length; i++){
-    if(cards[i].isUnderMouse(mouseX/4, mouseY/4)){
+    if(cards[i].isUnderMouse(mouseX , mouseY )){
       // click sur la carte
       if(flippedCards.length < 2 && !cards[i].isFaceUp) {
         // retournement de la carte
@@ -437,7 +443,7 @@ button = createButton('Gotcha');
 
 	this.draw = function(){
 	background("#fbe39e");
-  scale(4);
+
 
 		//Upper GUI showing the blockchain
 		textSize(22);
@@ -518,10 +524,10 @@ button = createButton('Gotcha');
 			text("NPC 2",205,135);
 			button.style('background-color',"#04AA6D");
 button.style('color',"white");
-button.style('padding','60px 100px');
-button.style('font-size','60px');;
+button.style('padding','15px 30px');
+button.style('font-size','20px');;
 			button.show();
-button.position(1100*4, 570*4);
+button.position(1100 , 570 );
 		}	else{
 			fill(255, 0, 0)
 			text("Nail the memory game to mine the block!",170,190);
@@ -542,12 +548,12 @@ button.position(1100*4, 570*4);
 	// 	}
 	// }
 	this.mousePressed = function(){
-			if(mouseX/4 >= 1100 && mouseX/4 < 1100 + 115 && mouseY/4 >= 550  && mouseY/4 < 550 + 50 && matches){
+			if(mouseX  >= 1100 && mouseX  < 1100 + 115 && mouseY  >= 550  && mouseY  < 550 + 50 && matches){
 				button.hide();
 				this.sceneManager.showNextScene();
 			}
   for(let i=0; i < cards.length; i++){
-    if(cards[i].isUnderMouse(mouseX/4, mouseY/4)){
+    if(cards[i].isUnderMouse(mouseX , mouseY )){
       // click sur la carte
       if(flippedCards.length < 2 && !cards[i].isFaceUp) {
         // retournement de la carte
@@ -625,7 +631,7 @@ button = createButton('Gotcha');
 
 	this.draw = function(){
 	background("#fbe39e");
-  scale(4);
+
 
 		//Upper GUI showing the blockchain
 		textSize(22);
@@ -711,10 +717,10 @@ button = createButton('Gotcha');
 			text("NPC 3",325,135);
 			button.style('background-color',"#04AA6D");
 button.style('color',"white");
-button.style('padding','60px 100px');
-button.style('font-size','60px');;
+button.style('padding','15px 30px');
+button.style('font-size','20px');;
 			button.show();
-button.position(1100*4, 570*4);
+button.position(1100 , 570 );
 		}	else{
 			fill(255, 0, 0)
 			text("Nail the memory game to mine the block!",170,190);
@@ -735,12 +741,12 @@ button.position(1100*4, 570*4);
 	// 	}
 	// }
 	this.mousePressed = function(){
-			if(mouseX/4 >= 1100 && mouseX/4 < 1100 + 115 && mouseY/4 >= 550  && mouseY/4 < 550 + 50 && matches){
+			if(mouseX  >= 1100 && mouseX  < 1100 + 115 && mouseY  >= 550  && mouseY  < 550 + 50 && matches){
 				button.hide();
 				this.sceneManager.showNextScene();
 			}
   for(let i=0; i < cards.length; i++){
-    if(cards[i].isUnderMouse(mouseX/4, mouseY/4)){
+    if(cards[i].isUnderMouse(mouseX , mouseY )){
       // click sur la carte
       if(flippedCards.length < 2 && !cards[i].isFaceUp) {
         // retournement de la carte
@@ -818,7 +824,7 @@ button = createButton('Gotcha');
 
 	this.draw = function(){
 	background("#fbe39e");
-  scale(4);
+
 
 		//Upper GUI showing the blockchain
 		textSize(22);
@@ -909,10 +915,10 @@ button = createButton('Gotcha');
 			text("User",455,135);
 			button.style('background-color',"#04AA6D");
 button.style('color',"white");
-button.style('padding','60px 100px');
-button.style('font-size','60px');;
+button.style('padding','15px 30px');
+button.style('font-size','20px');;
 			button.show();
-button.position(1100*4, 570*4);
+button.position(1100 , 570 );
 		}	else{
 			fill(255, 0, 0)
 			text("Nail the memory game to mine the block!",170,190);
@@ -933,12 +939,12 @@ button.position(1100*4, 570*4);
 	// 	}
 	// }
 	this.mousePressed = function(){
-			if(mouseX/4 >= 1100 && mouseX/4 < 1100 + 115 && mouseY/4 >= 550  && mouseY/4 < 550 + 50 && matches){
+			if(mouseX  >= 1100 && mouseX  < 1100 + 115 && mouseY  >= 550  && mouseY  < 550 + 50 && matches){
 				button.hide();
 				this.sceneManager.showNextScene();
 			}
   for(let i=0; i < cards.length; i++){
-    if(cards[i].isUnderMouse(mouseX/4, mouseY/4)){
+    if(cards[i].isUnderMouse(mouseX , mouseY )){
       // click sur la carte
       if(flippedCards.length < 2 && !cards[i].isFaceUp) {
         // retournement de la carte
@@ -1017,7 +1023,7 @@ let faceUpCards = [];
 
 	this.draw = function(){
 	background("#fbe39e");
-  scale(4);
+
 
 		//Upper GUI showing the blockchain
 		textSize(22);
@@ -1118,14 +1124,14 @@ let faceUpCards = [];
 			fill(0);
       NPC1.style('background-color',"#f6b235");
       NPC1.style('color',"white");
-      NPC1.style('padding','60px 100px');
-      NPC1.style('font-size','60px');
-			NPC1.position(650*4, 20*4);
+      NPC1.style('padding','15px 30px');
+      NPC1.style('font-size','20px');
+			NPC1.position(650 , 20 );
       NPC3.style('background-color',"red");
       NPC3.style('color',"white");
-      NPC3.style('padding','60px 100px');
-      NPC3.style('font-size','60px');
-			NPC3.position(650*4, 100*4);
+      NPC3.style('padding','15px 30px');
+      NPC3.style('font-size','20px');
+			NPC3.position(650 , 100 );
 
 		}	else{
 			fill(255, 0, 0)
@@ -1147,18 +1153,18 @@ let faceUpCards = [];
 	// 	}
 	// }
 	this.mousePressed = function(){
-			if(mouseX/4 >= 650 && mouseX/4 < 650 + 115 && mouseY/4 >= 40  && mouseY/4 < 40 + 50 && matches){
+			if(mouseX  >= 650 && mouseX  < 650 + 115 && mouseY  >= 40  && mouseY  < 40 + 50 && matches){
 				NPC1.hide();
 				NPC3.hide();
 				this.sceneManager.showScene( Block6_1 );
 			}
-			if(mouseX/4 >= 650 && mouseX/4 < 650 + 115 && mouseY/4 >= 120  && mouseY/4 < 120 + 50 && matches){
+			if(mouseX  >= 650 && mouseX  < 650 + 115 && mouseY  >= 120  && mouseY  < 120 + 50 && matches){
 				NPC1.hide();
 				NPC3.hide();
 				this.sceneManager.showScene( Block6_2 );
 			}
   for(let i=0; i < cards.length; i++){
-    if(cards[i].isUnderMouse(mouseX/4, mouseY/4)){
+    if(cards[i].isUnderMouse(mouseX , mouseY )){
       // click sur la carte
       if(flippedCards.length < 2 && !cards[i].isFaceUp) {
         // retournement de la carte
@@ -1237,7 +1243,7 @@ let faceUpCards = [];
 
 	this.draw = function(){
 	background("#fbe39e");
-  scale(4);
+
 
 		//Upper GUI showing the blockchain
 		textSize(22);
@@ -1348,9 +1354,9 @@ let faceUpCards = [];
 			text("NPC 2",850,130);
       button.style('background-color',"#04AA6D");
 button.style('color',"white");
-button.style('padding','60px 100px');
-button.style('font-size','60px');;
-			button.position(1100*4, 570*4);
+button.style('padding','15px 30px');
+button.style('font-size','20px');;
+			button.position(1100 , 570 );
 		}	else{
 			fill(255, 0, 0)
 			text("Nail the memory game to mine the block!",170,190);
@@ -1371,12 +1377,12 @@ button.style('font-size','60px');;
 	// 	}
 	// }
 	this.mousePressed = function(){
-			if(mouseX/4 >= 1100 && mouseX/4 < 1100 + 115 && mouseY/4 >= 550  && mouseY/4 < 550 + 50 && matches){
+			if(mouseX  >= 1100 && mouseX  < 1100 + 115 && mouseY  >= 550  && mouseY  < 550 + 50 && matches){
 				button.hide();
 				this.sceneManager.showScene( Block7_1 );
 			}
   for(let i=0; i < cards.length; i++){
-    if(cards[i].isUnderMouse(mouseX/4, mouseY/4)){
+    if(cards[i].isUnderMouse(mouseX , mouseY )){
       // click sur la carte
       if(flippedCards.length < 2 && !cards[i].isFaceUp) {
         // retournement de la carte
@@ -1455,7 +1461,7 @@ let faceUpCards = [];
 
 	this.draw = function(){
 	background("#fbe39e");
-  scale(4);
+
 
 		//Upper GUI showing the blockchain
 		textSize(22);
@@ -1565,8 +1571,8 @@ let faceUpCards = [];
 			text("User",850,130);
 			button.style('background-color',"#04AA6D");
 button.style('color',"white");
-button.style('padding','60px 100px');
-button.style('font-size','60px');button.position(1100*4, 570*4);
+button.style('padding','15px 30px');
+button.style('font-size','20px');button.position(1100 , 570 );
 		}	else{
 			fill(255, 0, 0)
 			text("Nail the memory game to mine the block!",170,190);
@@ -1587,13 +1593,13 @@ button.style('font-size','60px');button.position(1100*4, 570*4);
 	// 	}
 	// }
 	this.mousePressed = function(){
-			if(mouseX/4 >= 1100 && mouseX/4 < 1100 + 115 && mouseY/4 >= 550  && mouseY/4 < 550 + 50 && matches){
+			if(mouseX  >= 1100 && mouseX  < 1100 + 115 && mouseY  >= 550  && mouseY  < 550 + 50 && matches){
 				button.hide();
 				this.sceneManager.showScene( Block7_2 );
 			}
 
   for(let i=0; i < cards.length; i++){
-    if(cards[i].isUnderMouse(mouseX/4, mouseY/4)){
+    if(cards[i].isUnderMouse(mouseX , mouseY )){
       // click sur la carte
       if(flippedCards.length < 2 && !cards[i].isFaceUp) {
         // retournement de la carte
@@ -1673,7 +1679,7 @@ let faceUpCards = [];
 
 	this.draw = function(){
 	background("#fbe39e");
-  scale(4);
+
 
 		//Upper GUI showing the blockchain
 		textSize(22);
@@ -1797,9 +1803,9 @@ let faceUpCards = [];
 
 			button.style('background-color',"#04AA6D");
 button.style('color',"white");
-button.style('padding','60px 100px');
-button.style('font-size','60px');
-button.position(1100*4, 570*4);
+button.style('padding','15px 30px');
+button.style('font-size','20px');
+button.position(1100 , 570 );
 		}	else{
 			fill(255, 0, 0)
 			text("Nail the memory game to mine the block!",170,190);
@@ -1820,12 +1826,12 @@ button.position(1100*4, 570*4);
 	// 	}
 	// }
 	this.mousePressed = function(){
-			if(mouseX/4 >= 1100 && mouseX/4 < 1100 + 115 && mouseY/4 >= 550  && mouseY/4 < 550 + 50 && matches){
+			if(mouseX  >= 1100 && mouseX  < 1100 + 115 && mouseY  >= 550  && mouseY  < 550 + 50 && matches){
 				button.hide();
 				this.sceneManager.showScene( Block8 );
 			}
   for(let i=0; i < cards.length; i++){
-    if(cards[i].isUnderMouse(mouseX/4, mouseY/4)){
+    if(cards[i].isUnderMouse(mouseX , mouseY )){
       // click sur la carte
       if(flippedCards.length < 2 && !cards[i].isFaceUp) {
         // retournement de la carte
@@ -1905,7 +1911,7 @@ button = createButton('Gotcha');
 
 	this.draw = function(){
 	background("#fbe39e");
-  scale(4);
+
 
 		//Upper GUI showing the blockchain
 		textSize(22);
@@ -2025,9 +2031,9 @@ button = createButton('Gotcha');
 
 			button.style('background-color',"#04AA6D");
 button.style('color',"white");
-button.style('padding','60px 100px');
-button.style('font-size','60px');
-button.position(1100*4, 570*4);
+button.style('padding','15px 30px');
+button.style('font-size','20px');
+button.position(1100 , 570 );
 		}	else{
 			fill(255, 0, 0)
 			text("Nail the memory game to mine the block!",170,190);
@@ -2048,12 +2054,12 @@ button.position(1100*4, 570*4);
 	// 	}
 	// }
 	this.mousePressed = function(){
-			if(mouseX/4 >= 1100 && mouseX/4 < 1100 + 115 && mouseY/4 >= 550  && mouseY/4 < 550 + 50 && matches){
+			if(mouseX  >= 1100 && mouseX  < 1100 + 115 && mouseY  >= 550  && mouseY  < 550 + 50 && matches){
 				button.hide();
 				this.sceneManager.showScene( Block8 );
 			}
   for(let i=0; i < cards.length; i++){
-    if(cards[i].isUnderMouse(mouseX/4, mouseY/4)){
+    if(cards[i].isUnderMouse(mouseX , mouseY )){
       // click sur la carte
       if(flippedCards.length < 2 && !cards[i].isFaceUp) {
         // retournement de la carte
