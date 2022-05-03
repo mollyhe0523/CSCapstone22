@@ -340,7 +340,7 @@ function Block1()
 		}	else{
 			textSize(18);
 			fill(255, 0, 0)
-			text("Nail the memory game to mine the block!",170,190);
+			text("Nail the memory game to mine the block! Start by clicking on the cards below~",170,190);
 		}
 		if (frameCount%60==0 && !matches){
 			timer++;
@@ -1111,7 +1111,7 @@ let faceUpCards = [];
 
 			text("Oops! NPC 1 and NPC 3 are ahead of you, and they solved this problem at almost the same time!", 170, 520)
 			text("Two blocks are published. There is a fork now!", 170,550);
-			text("Make a choice of which chain you want to attach your future block to.", 170,580);
+			text("Click one of the buttons near the top to make a choice of which chain you want to attach your future block to.", 170,580);
 
 			fill(255, 0, 0)
 			text("X",540,90);
