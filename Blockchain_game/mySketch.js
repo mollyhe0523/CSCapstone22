@@ -50,7 +50,7 @@ function keyPressed()
     // You can optionaly handle the key press at global level...
     // switch(key)
     // {
-		// 		case '0':
+  	// 		case '0':
     //         mgr.showScene( Block0 );
     //         break;
     //     case '1':
@@ -124,10 +124,19 @@ class Card {
 
 function Block0()
 {
+	let game = round(random(0,1));
+	// console.log(game);
 	let ppts = [];
 	let counter = 0;
 	let	button = createButton('NEXT >>');
-  let a = createA('https://docs.google.com/forms/d/1gLLPqJnCHwlx38z6u1mmiZ1DWN3IVaOPc7XH6EaCCmI','link','_blank');
+	let a;
+	let controlppt;
+	if (game == 1){
+  	a = createA('https://docs.google.com/forms/d/1gLLPqJnCHwlx38z6u1mmiZ1DWN3IVaOPc7XH6EaCCmI','link','_blank');
+	}else{
+		a = createA('https://docs.google.com/forms/d/1UjaswEVrmla6J8FyDxOL8hMqP8XVYSimIUu8ngOBfoo','link','_blank');
+		controlppt = loadImage("src/Assignment.jpg");
+	}
 	a.hide();
 
 	this.nextPPT = function(){
@@ -136,6 +145,9 @@ function Block0()
 			imageMode(CORNER);
 			button.hide();
 		}else if (counter ==0){
+			if (game ==0){
+				button.hide();
+			}
 			a.show();
       a.style("font-size",'50px')
       a.position(window.innerWidth/2,window.innerHeight/2);
@@ -171,7 +183,11 @@ function Block0()
 
 	this.draw=function(){
 		imageMode(CENTER);
-		image(ppts[counter],width/2,height/2,height*3000/1688,height);
+		if ((counter ==1) && (game ==0)){
+			image(controlppt,width/2,height/2,height*3000/1688,height);
+		}else{
+			image(ppts[counter],width/2,height/2,height*3000/1688,height);
+		}
 	}
 }
 
