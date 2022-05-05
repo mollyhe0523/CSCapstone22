@@ -129,15 +129,15 @@ function Block0()
 	let ppts = [];
 	let counter = 0;
 	let	button = createButton('NEXT >>');
-	let a;
+	// let a;
 	// let controlppt;
 	// if (game == 1){
-  	a = createA('https://docs.google.com/forms/d/1gLLPqJnCHwlx38z6u1mmiZ1DWN3IVaOPc7XH6EaCCmI','link','_blank');
+  	// a = createA('https://docs.google.com/forms/d/1gLLPqJnCHwlx38z6u1mmiZ1DWN3IVaOPc7XH6EaCCmI','link','_blank');
 	// }else{
 	// 	a = createA('https://docs.google.com/forms/d/1UjaswEVrmla6J8FyDxOL8hMqP8XVYSimIUu8ngOBfoo','link','_blank');
 	// 	controlppt = loadImage("src/Assignment.jpg");
 	// }
-	a.hide();
+	// a.hide();
 
 	this.nextPPT = function(){
 		if (counter==19){
@@ -148,12 +148,13 @@ function Block0()
 			// if (game ==0){
 			// 	button.hide();
 			// }
-			a.show();
-      a.style("font-size",'50px')
-      a.position(window.innerWidth/2,window.innerHeight/2);
-      counter++;
-    }else if (counter ==1){
-      a.hide();
+			// a.show();
+      // a.style("font-size",'50px')
+      // a.position(window.innerWidth/2,window.innerHeight/2);
+      // counter++;
+    // }else if (counter ==1){
+    //   a.hide();
+			counter++;
       counter++;
     }else{
 			counter++;
@@ -197,14 +198,14 @@ function Block8()
   let counter = 0;
   let	button = createButton('NEXT >>');
 	button.hide();
-  let a = createA('https://docs.google.com/forms/d/1qt_hIo0TmFL2ECr4_W41jHOBq3B9LbNpnoRPUi1mtrs','link','_blank');
-	a.hide()
+  // let a = createA('https://docs.google.com/forms/d/1qt_hIo0TmFL2ECr4_W41jHOBq3B9LbNpnoRPUi1mtrs','link','_blank');
+	// a.hide()
 
   this.nextPPT = function(){
     if (counter ==2){
-			a.show();
-      a.style("font-size",'50px')
-      a.position(window.innerWidth/2,window.innerHeight/2);
+		// 	a.show();
+    //   a.style("font-size",'50px')
+    //   a.position(window.innerWidth/2,window.innerHeight/2);
       button.hide();
     }
     counter++;
